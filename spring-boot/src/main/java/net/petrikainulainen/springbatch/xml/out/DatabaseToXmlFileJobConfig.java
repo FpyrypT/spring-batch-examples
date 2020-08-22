@@ -1,5 +1,6 @@
 package net.petrikainulainen.springbatch.xml.out;
 
+import com.sun.xml.internal.txw2.output.IndentingXMLStreamWriter;
 import net.petrikainulainen.springbatch.common.LoggingStudentProcessor;
 import net.petrikainulainen.springbatch.student.StudentDTO;
 import org.springframework.batch.core.Job;
@@ -55,7 +56,7 @@ public class DatabaseToXmlFileJobConfig {
 
     @Bean
     ItemWriter<StudentDTO> databaseXmlItemWriter(Environment environment) {
-        StaxEventItemWriter<StudentDTO> xmlFileWriter = new StaxEventItemWriter<>();
+        IndentingStaxEventItemWriter<StudentDTO> xmlFileWriter = new IndentingStaxEventItemWriter<>();
 
         String exportFilePath = environment.getRequiredProperty(PROPERTY_XML_EXPORT_FILE_PATH);
         xmlFileWriter.setResource(new FileSystemResource(exportFilePath));
